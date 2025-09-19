@@ -15,7 +15,7 @@ export default function PrivateRoute({ children }: PrivateRouteProps) {
 
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.replace('/auth');
+      router.replace('/api/auth');
     }
   }, [status, router]);
 
