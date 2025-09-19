@@ -43,7 +43,14 @@ next-env.d.ts
 
 # my custom
 
-components
+Pasination.tsx
+PostCard.tsx
+SearchInput.tsx
+StateCard.tsx
+UserCard.tsx
+UserModal.tsx
+UserTable.tsx
+useUser.ts
 Pages
 posts
 setting
