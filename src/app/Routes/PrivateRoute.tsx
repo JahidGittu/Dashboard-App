@@ -15,7 +15,7 @@ export default function PrivateRoute({ children }: PrivateRouteProps) {
 
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.replace('/auth/page'); // redirect to sign-in page
+      router.replace('/auth');
     }
   }, [status, router]);
 

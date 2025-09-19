@@ -1,113 +1,193 @@
-# 🚀 Mini Dashboard – Zettabyte Technology Inc. (Frontend Developer Test)
+# Task Dashboard
 
-This project is a **mini dashboard** built with **Next.js 15**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.  
-It was created as part of the **Frontend Developer Test** for **Zettabyte Technology Inc.**.
+[Live Demo](https://dashboard-app-dun-seven.vercel.app/)
 
-The goal of this test is to evaluate **UI/UX**, **component reusability**, **state management**, and **animations** — not algorithms.
-
----
-
-## ✨ Features
-
-- 🏠 **Dashboard Home (`/`)** – Static summary section with animated UI elements
-- 📝 **Posts (`/posts`)** – Fetch posts from API, display in reusable **Card components**
-  - Dynamic routes `/posts/[id]` for single post details
-- 👥 **Users (`/users`)** – Fetch and display users in a responsive **table**
-  - On row click → Animated **modal** with user details
-- 🔄 **Custom Hook (`useFetch`)** – For API calls with loading + error handling
-- 🎨 **Framer Motion Animations**:
-  - Animated sidebar
-  - Staggered card animations
-  - Modal scale + fade transitions
-- ⚡ **Error Handling & Demo** – Simulates failed requests with a clear UI error message
-- 💾 **Reusable components** – Card, Modal, Table, etc.
-- 🌐 **Deployment** – Live demo hosted on **Vercel**
+A modern **mini dashboard** built with **Next.js 15**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**, featuring reusable components, API integration, animations, and optional authentication using **NextAuth.js**.
 
 ---
 
-## 🛠 Tech Stack
+## Table of Contents
 
-- ⚛️ **Next.js 15 (App Router)**
-- 🔷 **TypeScript**
-- 🎨 **Tailwind CSS**
-- 🎬 **Framer Motion**
-- 🧰 **React Hooks (custom `useFetch`)**
-- ✅ **Error & Loading states**
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Pages & Routes](#pages--routes)
+- [Animations](#animations)
+- [Error Handling & Loading](#error-handling--loading)
+- [Setup & Installation](#setup--installation)
+- [Scripts](#scripts)
+- [Future Improvements](#future-improvements)
+- [Author](#author)
 
 ---
 
-## 📂 Project Structure
+## Overview
 
+This dashboard demonstrates a **clean UI-focused frontend project**:
+
+- Fetches and displays data from **JSONPlaceholder API**.
+- Supports **posts**, **users**, **todos**, and **comments**.
+- Fully responsive and animated using **Framer Motion**.
+- Implements reusable **Card** and **Chart** components.
+- Optional **protected routes** for authenticated pages via **NextAuth.js**.
+
+---
+
+## Features
+
+- Dashboard overview with stats cards.
+- Reusable **Card** components.
+- Dynamic routes for posts: `/posts` and `/posts/[id]`.
+- Users page with **responsive table** and animated modal.
+- API fetching using custom hooks (`useFetch`, `useInfiniteFetch`).
+- **Loading spinners** and error messages for API calls.
+- **Protected routes** for dashboard pages (optional).
+- Smooth **animations** with Framer Motion.
+- Fully responsive design using **Tailwind CSS**.
+
+---
+
+## Tech Stack
+
+- **Frontend Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS, Tailwind Animations
+- **Animations:** Framer Motion
+- **Authentication (Optional):** NextAuth.js
+- **Icons:** Lucide React, React Icons
+- **Charts:** Recharts
+- **Database (if using Auth):** MongoDB with Mongoose
+- **Utilities:** Styled-components, SweetAlert2, Tailwind Merge
+
+---
+
+## Project Structure
+
+```
 src/
 ├── app/
-│ ├── page.tsx # Dashboard Home
-│ ├── posts/
-│ │ ├── page.tsx # Posts List
-│ │ └── [id]/page.tsx # Post Details
-│ ├── users/page.tsx # Users Table + Modal
-│
-├── components/
-│ ├── Card.tsx
-│ ├── Modal.tsx
-│ ├── Table.tsx
-│ └── Layout.tsx
-│
-├── hooks/
-│ └── useFetch.ts # Custom API fetching hook
-│
-└── styles/
-└── globals.css
-
-yaml
-Copy code
+│   ├── api/auth/        # Authentication APIs (SignIn, SignUp, NextAuth)
+│   ├── dashboard/       # Dashboard pages, components, charts
+│   ├── hook/            # Custom hooks (useFetch, useInfiniteFetch)
+│   ├── Routes/          # PrivateRoute component
+│   ├── lib/             # Database connection utilities
+│   └── modal/           # Mongoose models
+├── utils/               # Utility functions
+├── globals.css
+├── layout.tsx
+└── page.tsx
+```
 
 ---
 
-## ⚡ Getting Started
+## Pages & Routes
 
-### 1️⃣ Clone the repo
+| Route            | Description                                             |
+| ---------------- | ------------------------------------------------------- |
+| `/`              | Dashboard home: stats, charts, reload button            |
+| `/dashboard/...` | Protected dashboard routes (optional)                   |
+| `/posts`         | List of posts fetched from JSONPlaceholder API          |
+| `/posts/[id]`    | Dynamic route to view single post details               |
+| `/users`         | Users page: table with modal for details                |
+| `/setting`       | User Profile Setting page: table with modal for details |
+| `/login`         | Login page (if using auth)                              |
+
+---
+
+## Animations
+
+- **Dashboard Header & Cards:** Fade-in and staggered animations
+- **Modal Animations:** Scale + opacity transitions
+- **Loading Spinner:** Infinite rotation with Framer Motion
+- **Buttons & Actions:** Hover and tap animations
+
+---
+
+## Error Handling & Loading
+
+- Shows **LoadingSpinner** while fetching data
+- Displays **clear error messages** for failed API requests
+- Simulated error handling implemented for testing robustness
+
+---
+
+## Setup & Installation
+
+1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/task-dashboard.git
+git clone <your-repo-link>
 cd task-dashboard
-2️⃣ Install dependencies
-bash
+```
 
+2. Install dependencies:
+
+```bash
 npm install
-# or
-yarn install
-3️⃣ Run locally
+```
 
+3. Add environment variables:
+
+```bash
+# .env.local
+NEXTAUTH_URL=http://localhost:3000
+MONGODB_URI=your_mongo_db_connection_string
+NEXTAUTH_SECRET=your_secret
+```
+
+4. Run the development server:
+
+```bash
 npm run dev
-Then visit 👉 http://localhost:3000
+```
 
-🌍 Deployment
-This project is deployed on Vercel.
-🔗 Live Demo:
+5. Build for production (skip lint errors):
 
-🧪 Test Requirements Covered
-✔️ Dashboard Home with static + animated content
-✔️ Posts page with API fetch + reusable Card component
-✔️ Dynamic routes for post details
-✔️ Users page with responsive table + animated modal
-✔️ Custom useFetch hook for API calls
-✔️ Error handling with demo error state
-✔️ Clean code, reusable components, Tailwind styling
-✔️ Framer Motion animations for Sidebar, Modal, Cards
-✔️ Deployed on Vercel with GitHub repo
-
-🔑 Bonus (Optional)
-🔐 Also Added Protected Routes
-🔐 Basic NextAuth.js (Google login) can be added for a protected /profile page (not required, but supported).
+```bash
+npm run build
+npm start
+```
 
 ---
 
-⚡ This `README.md` is recruiter-friendly:
-- ✅ Clear project explanation
-- ✅ Tech stack listed
-- ✅ Setup + deploy guide
-- ✅ Shows requirements coverage
-- ✅ Clean markdown formatting with emojis
+## Scripts
 
-Do you also want me to **write a short section on “Intentional Error Handling Demo”** (like how to simulate an error) so they see you followed that requirement too?
-```
+| Script          | Description                                   |
+| --------------- | --------------------------------------------- |
+| `npm run dev`   | Start dev server with Turbopack               |
+| `npm run build` | Build production (skip lint with `--no-lint`) |
+| `npm start`     | Start production server                       |
+| `npm run lint`  | Run ESLint                                    |
+
+---
+
+## Deployment
+
+- **Deployed on Vercel:** [Live Dashboard](https://dashboard-app-dun-seven.vercel.app/)
+- **CI/CD:** Push to GitHub → Automatic Vercel deployment
+- **Note:** Protected routes require authentication to view full dashboard
+
+---
+
+## Future Improvements
+
+- Complete authentication for all dashboard pages
+- Add more charts and analytics
+- Implement fully dynamic modals for posts and users
+- Enhance error handling and unit tests
+- Add pagination for posts and users
+
+---
+
+## Author
+
+**Jahid Hossen**
+
+- Frontend Developer | Passionate about clean UI & reusable components
+- GitHub: \[your-github-profile]
+- LinkedIn: \[your-linkedin-profile]
+
+---
+
+> 🚀 Built with ❤️ using Next.js, TypeScript, Tailwind CSS, and Framer
