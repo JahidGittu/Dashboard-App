@@ -45,10 +45,6 @@ next-env.d.ts
 
 # Pagination.tsx
 
-useUser.ts
-Pages
-
-setting
 
 api
 context
