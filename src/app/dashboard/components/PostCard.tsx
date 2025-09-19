@@ -16,6 +16,8 @@ interface PostCardProps {
 export default function PostCard({ post }: PostCardProps) {
   const [likeCount, setLikeCount] = useState(0);
 
+
+
   // লোকালস্টোরেজ থেকে লাইক ডাটা লোড করবো
   useEffect(() => {
     const savedLikes = localStorage.getItem(`post-like-${post.id}`);

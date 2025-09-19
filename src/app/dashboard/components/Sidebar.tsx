@@ -3,7 +3,7 @@
 import { ClipboardList, Home, LayoutDashboardIcon, LogOut, User } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
@@ -33,24 +33,30 @@ export function Sidebar({
 
   const pathname = usePathname();
 
+  const router = useRouter();
+
   // 🔹 Logout handler with SweetAlert + NextAuth
   const handleLogout = () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will be logged out!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, logout!',
-    }).then((result: SweetAlertResult) => {
-      if (result.isConfirmed) {
-        signOut({ callbackUrl: '/api/auth' })
-          .then(() => Swal.fire('Logged Out!', 'You have been logged out.', 'success'))
-          .catch((err) => console.error(err));
-      }
-    });
-  };
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You will be logged out!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, logout!',
+  }).then((result: SweetAlertResult) => {
+    if (result.isConfirmed) {
+      signOut({ redirect: false })
+        .then(() => {
+          router.push("/api/auth"); // 
+          Swal.fire('Logged Out!', 'You have been logged out.', 'success');
+        })
+        .catch((err) => console.error(err));
+    }
+  });
+};
+
 
   // Sync with parent
   useEffect(() => {

@@ -47,7 +47,11 @@ export function DashboardHeader({ collapsed, setCollapsed }: DashboardHeaderProp
     });
 
     if (result.isConfirmed) {
-      await signOut({ callbackUrl: '/api/auth' });
+      const res = await signOut({ redirect: false });
+
+      if (res?.url) {
+        router.push('/api/auth'); 
+      }
     }
   };
 
