@@ -3,16 +3,16 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import SignInForm from './[...nextauth]/SignIn/SignInForm';
+import AuthPageWrapper from './AuthPageWrapper';
 import GoogleSignIn from './GoogleSignIn';
 import SignUpForm from './SignUp/SignUpForm';
-import AuthPageWrapper from './AuthPageWrapper';
 
 const AuthPage: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
     <AuthPageWrapper>
-      <div className="min-h-screen bg-card-foreground/40 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-card-foreground/20 flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
