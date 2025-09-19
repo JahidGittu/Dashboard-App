@@ -43,16 +43,15 @@ next-env.d.ts
 
 # my custom
 
-Pasination.tsx
-PostCard.tsx
-SearchInput.tsx
+# Pagination.tsx
+
 StateCard.tsx
 UserCard.tsx
 UserModal.tsx
 UserTable.tsx
 useUser.ts
 Pages
-posts
+
 setting
 users
 api
