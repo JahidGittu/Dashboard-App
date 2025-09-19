@@ -109,7 +109,6 @@ export default function Dashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-gray-500">Overview powered by JSONPlaceholder API</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.05 }}

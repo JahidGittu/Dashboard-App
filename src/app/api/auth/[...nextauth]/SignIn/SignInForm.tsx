@@ -97,7 +97,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ switchToSignUp }) => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-gradient-primary text-white py-3 px-4 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+        className="w-full bg-card-foreground/30 text-white py-3 px-4 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
       >
         {loading ? <LoadingSpinner /> : 'Sign In'}
       </button>

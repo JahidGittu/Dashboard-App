@@ -1,19 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  ChevronDown,
-  LogOut,
-  PanelLeftClose,
-  PanelLeftOpen,
-  Search,
-  Settings,
-  User,
-} from 'lucide-react';
+import { ChevronDown, LogOut, PanelLeftClose, PanelLeftOpen, Settings } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import Swal, { SweetAlertResult } from 'sweetalert2'; // ✅ SweetAlert2
+import Swal from 'sweetalert2';
 import ThemeSwitch from './ThemeSwitch';
 
 interface DashboardHeaderProps {
@@ -22,13 +15,13 @@ interface DashboardHeaderProps {
 }
 
 export function DashboardHeader({ collapsed, setCollapsed }: DashboardHeaderProps) {
-  const pathname = usePathname();
-  const [searchQuery, setSearchQuery] = useState('');
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const { data: session } = useSession();
   const user = session?.user;
+
+  const router = useRouter();
 
   // Close profile dropdown on outside click
   useEffect(() => {
@@ -41,16 +34,9 @@ export function DashboardHeader({ collapsed, setCollapsed }: DashboardHeaderProp
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log('Searching for:', searchQuery);
-    }
-  };
-
   // 🔹 Logout with SweetAlert2
-  const handleLogout = () => {
-    Swal.fire({
+  const handleLogout = async () => {
+    const result = await Swal.fire({
       title: 'Are you sure?',
       text: 'You will be logged out!',
       icon: 'warning',
@@ -58,13 +44,11 @@ export function DashboardHeader({ collapsed, setCollapsed }: DashboardHeaderProp
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, logout!',
-    }).then((result: SweetAlertResult) => {
-      if (result.isConfirmed) {
-        signOut({ callbackUrl: '/api/auth' })
-          .then(() => Swal.fire('Logged Out!', 'You have been logged out.', 'success'))
-          .catch((err) => console.error(err));
-      }
     });
+
+    if (result.isConfirmed) {
+      await signOut({ callbackUrl: '/api/auth' });
+    }
   };
 
   return (
@@ -88,20 +72,8 @@ export function DashboardHeader({ collapsed, setCollapsed }: DashboardHeaderProp
         </button>
       </div>
 
-      {/* Center: Search */}
-      <div className="flex-1 flex justify-center px-2 md:px-0">
-        <form onSubmit={handleSearch} className="relative w-full max-w-md md:max-w-lg lg:max-w-xl">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground-muted w-4 h-4" />
-          <input
-            type="text"
-            placeholder="Search posts, users, analytics..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 py-2 w-full bg-input border border-border rounded-lg
-                 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary
-                 hover:bg-input-hover transition-colors"
-          />
-        </form>
+      <div>
+        <h1 className="text-accent-foreground font-bold text-3xl"> Simple Dashboard </h1>
       </div>
 
       {/* Right: Actions */}
@@ -150,18 +122,16 @@ export function DashboardHeader({ collapsed, setCollapsed }: DashboardHeaderProp
               </div>
 
               <div className="p-1">
-                <button className="w-full flex items-center gap-3 px-3 py-2 text-sm hover:bg-secondary rounded-md transition-colors">
-                  <User className="w-4 h-4" />
-                  Profile
-                </button>
-                <button className="w-full flex items-center gap-3 px-3 py-2 text-sm hover:bg-secondary rounded-md transition-colors">
-                  <Settings className="w-4 h-4" />
-                  Settings
-                </button>
+                <Link href="/dashboard/setting">
+                  <button className="w-full flex items-center gap-3 px-3 py-2 text-sm hover:bg-secondary rounded-md transition-colors cursor-pointer">
+                    <Settings className="w-4 h-4" />
+                    Settings
+                  </button>
+                </Link>
                 <div className="border-t border-border my-1" />
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-3 py-2 text-sm text-error hover:bg-error/10 rounded-md transition-colors"
+                  className="w-full flex items-center bg-card-foreground/30 gap-3 px-3 py-2 text-sm text-error hover:bg-error/10 rounded-md transition-colors cursor-pointer"
                 >
                   <LogOut className="w-4 h-4" />
                   Logout

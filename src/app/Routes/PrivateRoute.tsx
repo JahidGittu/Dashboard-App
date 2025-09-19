@@ -1,8 +1,8 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 import { LoadingSpinner } from '../dashboard/components/Loading';
 
 interface PrivateRouteProps {
@@ -10,14 +10,12 @@ interface PrivateRouteProps {
 }
 
 export default function PrivateRoute({ children }: PrivateRouteProps) {
-  const { data: session, status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.replace('/api/auth');
-    }
-  }, [status, router]);
+  // required:true automatically redirects unauthenticated users
+  const { data: session, status } = useSession({ required: true, onUnauthenticated() {
+    router.replace('/api/auth'); // redirect to login page
+  }});
 
   if (status === 'loading') {
     return (
@@ -27,7 +25,11 @@ export default function PrivateRoute({ children }: PrivateRouteProps) {
     );
   }
 
-  if (status === 'unauthenticated') return null;
+  // Extra safety: if somehow session is missing
+  if (!session) {
+    router.replace('/api/auth');
+    return null;
+  }
 
   return <>{children}</>;
 }

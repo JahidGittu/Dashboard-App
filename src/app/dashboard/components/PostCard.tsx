@@ -29,7 +29,7 @@ export default function PostCard({ post }: PostCardProps) {
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
-      className="relative flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-shadow overflow-hidden min-h-[280px]"
+      className="relative flex flex-col bg-card-foreground/10 rounded-2xl shadow-md hover:shadow-xl transition-shadow overflow-hidden min-h-[280px]"
     >
       {/* Like Counter (top-right corner) */}
       <div className="absolute top-3 right-3 flex items-center gap-1 bg-white/80 dark:bg-gray-700/80 px-2 py-1 rounded-full shadow text-xs">
