@@ -1,6 +1,4 @@
-
 // File: components/ErrorState.tsx
-import React from 'react';
 import { RefreshCw } from 'lucide-react';
 
 type Props = {

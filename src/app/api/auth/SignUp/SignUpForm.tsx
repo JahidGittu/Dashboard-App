@@ -1,6 +1,6 @@
 'use client';
 
-import { LoadingSpinner } from '@/app/dashboard/Components/Loading';
+import { LoadingSpinner } from '@/app/dashboard/components/Loading';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail, User } from 'lucide-react';
 import { signIn } from 'next-auth/react';

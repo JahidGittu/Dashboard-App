@@ -2,10 +2,10 @@
 
 import { useFetch } from '@/app/hook/useFetch';
 import { motion } from 'framer-motion';
-import PostCard from '../components/PostCard';
-import { LoadingSpinner } from '../Components/Loading';
-import Pagination from '../components/Pagination';
 import { useState } from 'react';
+import { LoadingSpinner } from '../components/Loading';
+import Pagination from '../components/Pagination';
+import PostCard from '../components/PostCard';
 
 export default function PostsPage() {
   const [page, setPage] = useState(1);
@@ -13,11 +13,7 @@ export default function PostsPage() {
   const totalPosts = 100; // jsonplaceholder এর মোট পোস্ট
   const totalPages = Math.ceil(totalPosts / limit);
 
-  const {
-    data: posts,
-    loading,
-    error,
-  } = useFetch<any[]>(`/posts?_page=${page}&_limit=${limit}`);
+  const { data: posts, loading, error } = useFetch<any[]>(`/posts?_page=${page}&_limit=${limit}`);
 
   if (loading)
     return (
@@ -43,9 +39,7 @@ export default function PostsPage() {
       <div className="flex items-center justify-center w-full pb-4">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Posts</h1>
-          <p className="text-foreground-muted">
-            Explore all blog posts and articles
-          </p>
+          <p className="text-foreground-muted">Explore all blog posts and articles</p>
         </div>
       </div>
 
@@ -57,11 +51,7 @@ export default function PostsPage() {
       </div>
 
       {/* Pagination */}
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        onPageChange={setPage}
-      />
+      <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
     </motion.div>
   );
 }

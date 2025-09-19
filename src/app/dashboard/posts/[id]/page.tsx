@@ -1,12 +1,12 @@
 'use client';
 
 import { useFetch } from '@/app/hook/useFetch';
-import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import { Heart, User } from 'lucide-react';
 import Link from 'next/link';
-import { LoadingSpinner } from '../../Components/Loading';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { LoadingSpinner } from '../../components/Loading';
 
 export default function PostDetailPage() {
   const { id } = useParams();
@@ -63,7 +63,10 @@ export default function PostDetailPage() {
 
   if (loading)
     return (
-      <div className="flex items-center justify-center h-screen"> <LoadingSpinner/> </div>
+      <div className="flex items-center justify-center h-screen">
+        {' '}
+        <LoadingSpinner />{' '}
+      </div>
     );
 
   if (error)

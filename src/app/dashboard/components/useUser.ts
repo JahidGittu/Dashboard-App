@@ -1,4 +1,3 @@
-
 // File: hooks/useUsers.ts
 import { useEffect, useState } from 'react';
 import { User } from '../components/UserModal';

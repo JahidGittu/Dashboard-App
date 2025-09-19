@@ -1,7 +1,6 @@
 // File: components/UserModal.tsx
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Building } from 'lucide-react';
+import { Building, Mail, Phone } from 'lucide-react';
 
 type Address = {
   street?: string;
@@ -69,10 +68,7 @@ export default function UserModal({ user, isOpen, onClose }: Props) {
         <div className="mt-4 space-y-3">
           <div className="flex items-center gap-2">
             <Mail className="w-4 h-4 text-gray-400" />
-            <a
-              className="text-sm hover:underline"
-              href={`mailto:${user.email}`}
-            >
+            <a className="text-sm hover:underline" href={`mailto:${user.email}`}>
               {user.email}
             </a>
           </div>
@@ -88,9 +84,7 @@ export default function UserModal({ user, isOpen, onClose }: Props) {
               <div className="text-sm">
                 <div className="font-medium">{user.company.name}</div>
                 {user.company.catchPhrase && (
-                  <div className="text-gray-500 dark:text-gray-400">
-                    {user.company.catchPhrase}
-                  </div>
+                  <div className="text-gray-500 dark:text-gray-400">{user.company.catchPhrase}</div>
                 )}
               </div>
             </div>
@@ -100,8 +94,8 @@ export default function UserModal({ user, isOpen, onClose }: Props) {
             <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
               <div className="text-sm font-medium">Address</div>
               <div className="text-sm text-gray-500 dark:text-gray-400">
-                {user.address.street ?? ''} {user.address.suite ?? ''},{" "}
-                {user.address.city ?? ''} {user.address.zipcode ?? ''}
+                {user.address.street ?? ''} {user.address.suite ?? ''}, {user.address.city ?? ''}{' '}
+                {user.address.zipcode ?? ''}
               </div>
             </div>
           )}

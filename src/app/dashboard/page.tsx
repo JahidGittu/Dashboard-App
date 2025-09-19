@@ -6,7 +6,8 @@ import CompanyDistributionChart from './components/charts/CompanyDistributionCha
 import RevenueChart from './components/charts/RevenueChart';
 import UserActivityChart from './components/charts/UserActivityChart';
 import StatCard from './components/StatCard';
-import { LoadingSpinner } from './Components/Loading';
+import { LoadingSpinner } from './components/Loading';
+
 
 export default function Dashboard() {
   const {

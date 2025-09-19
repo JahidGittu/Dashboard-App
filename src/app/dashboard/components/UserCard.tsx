@@ -1,5 +1,5 @@
 // File: components/Card.tsx
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 type CardProps = {
   children: ReactNode;

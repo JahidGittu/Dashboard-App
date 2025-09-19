@@ -1,7 +1,6 @@
 // File: components/UserTable.tsx
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Building } from 'lucide-react';
+import { Building, Mail, Phone } from 'lucide-react';
 import { User } from './UserModal';
 
 type Props = {
@@ -35,11 +34,17 @@ export default function UserTable({ users, onRowClick }: Props) {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                     <span className="text-sm font-bold text-white">
-                      {user.name?.split(' ').map(n => n[0]).filter(Boolean).join('') ?? 'U'}
+                      {user.name
+                        ?.split(' ')
+                        .map((n) => n[0])
+                        .filter(Boolean)
+                        .join('') ?? 'U'}
                     </span>
                   </div>
                   <div>
-                    <p className="font-medium group-hover:text-primary transition-colors">{user.name}</p>
+                    <p className="font-medium group-hover:text-primary transition-colors">
+                      {user.name}
+                    </p>
                     <p className="text-sm text-foreground-muted">@{user.username ?? ''}</p>
                   </div>
                 </div>

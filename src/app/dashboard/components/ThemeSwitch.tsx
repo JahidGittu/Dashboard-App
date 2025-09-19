@@ -1,85 +1,85 @@
-"use client";
+'use client';
 
-import { useEffect, useState, FC } from "react";
-import styled from "styled-components";
+import { FC, useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const ThemeSwitch: FC = () => {
-    const [mounted, setMounted] = useState(false);
-    const [checked, setChecked] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [checked, setChecked] = useState(false);
 
-    useEffect(() => {
-        setMounted(true);
+  useEffect(() => {
+    setMounted(true);
 
-        // Get theme from localStorage or system preference
-        const storedTheme = localStorage.getItem("theme");
-        if (storedTheme) {
-            document.documentElement.classList.toggle("dark", storedTheme === "dark");
-            setChecked(storedTheme === "dark");
-        } else {
-            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-            document.documentElement.classList.toggle("dark", prefersDark);
-            setChecked(prefersDark);
-        }
-    }, []);
+    // Get theme from localStorage or system preference
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      document.documentElement.classList.toggle('dark', storedTheme === 'dark');
+      setChecked(storedTheme === 'dark');
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', prefersDark);
+      setChecked(prefersDark);
+    }
+  }, []);
 
-    const toggleTheme = () => {
-        const newTheme = checked ? "light" : "dark";
-        document.documentElement.classList.toggle("dark", newTheme === "dark");
-        localStorage.setItem("theme", newTheme);
-        setChecked(!checked);
-    };
+  const toggleTheme = () => {
+    const newTheme = checked ? 'light' : 'dark';
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem('theme', newTheme);
+    setChecked(!checked);
+  };
 
-    if (!mounted) return null;
+  if (!mounted) return null;
 
-    return (
-        <StyledWrapper>
-            <label className="theme-switch">
-                <input
-                    type="checkbox"
-                    className="theme-switch__checkbox"
-                    checked={checked}
-                    onChange={toggleTheme}
-                />
-                <div className="theme-switch__container">
-                    <div className="theme-switch__clouds" />
-                    <div className="theme-switch__stars-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
-                            <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M135.831 3.00688C135.055 3.85027..."
-                                fill="currentColor"
-                            />
-                        </svg>
-                    </div>
-                    <div className="theme-switch__circle-container">
-                        <div className="theme-switch__sun-moon-container">
-                            <div className="theme-switch__moon">
-                                <div className="theme-switch__spot" />
-                                <div className="theme-switch__spot" />
-                                <div className="theme-switch__spot" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="theme-switch__shooting-star" />
-                    <div className="theme-switch__shooting-star-2" />
-                    <div className="theme-switch__meteor" />
-                    <div className="theme-switch__stars-cluster">
-                        <div className="star" />
-                        <div className="star" />
-                        <div className="star" />
-                        <div className="star" />
-                        <div className="star" />
-                    </div>
-                    <div className="theme-switch__aurora" />
-                    <div className="theme-switch__comets">
-                        <div className="comet" />
-                        <div className="comet" />
-                    </div>
-                </div>
-            </label>
-        </StyledWrapper>
-    );
+  return (
+    <StyledWrapper>
+      <label className="theme-switch">
+        <input
+          type="checkbox"
+          className="theme-switch__checkbox"
+          checked={checked}
+          onChange={toggleTheme}
+        />
+        <div className="theme-switch__container">
+          <div className="theme-switch__clouds" />
+          <div className="theme-switch__stars-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M135.831 3.00688C135.055 3.85027..."
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+          <div className="theme-switch__circle-container">
+            <div className="theme-switch__sun-moon-container">
+              <div className="theme-switch__moon">
+                <div className="theme-switch__spot" />
+                <div className="theme-switch__spot" />
+                <div className="theme-switch__spot" />
+              </div>
+            </div>
+          </div>
+          <div className="theme-switch__shooting-star" />
+          <div className="theme-switch__shooting-star-2" />
+          <div className="theme-switch__meteor" />
+          <div className="theme-switch__stars-cluster">
+            <div className="star" />
+            <div className="star" />
+            <div className="star" />
+            <div className="star" />
+            <div className="star" />
+          </div>
+          <div className="theme-switch__aurora" />
+          <div className="theme-switch__comets">
+            <div className="comet" />
+            <div className="comet" />
+          </div>
+        </div>
+      </label>
+    </StyledWrapper>
+  );
 };
 
 const StyledWrapper = styled.div`
@@ -127,34 +127,26 @@ const StyledWrapper = styled.div`
     border-radius: var(--container-radius);
     overflow: hidden;
     cursor: pointer;
-    -webkit-box-shadow:
-      0em -0.062em 0.062em rgba(0, 0, 0, 0.25),
+    -webkit-box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25),
       0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
-    box-shadow:
-      0em -0.062em 0.062em rgba(0, 0, 0, 0.25),
+    box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25),
       0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
     -webkit-transition: var(--transition);
     -o-transition: var(--transition);
     transition: var(--transition);
     position: relative;
-    background-image: linear-gradient(
-      to bottom,
-      var(--container-light-bg) 0%,
-      #5490c0 100%
-    );
+    background-image: linear-gradient(to bottom, var(--container-light-bg) 0%, #5490c0 100%);
     transition: all var(--transition);
   }
 
   .theme-switch__container::before {
-    content: "";
+    content: '';
     position: absolute;
     z-index: 1;
     inset: 0;
-    -webkit-box-shadow:
-      0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset,
+    -webkit-box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset,
       0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
-    box-shadow:
-      0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset,
+    box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset,
       0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
     border-radius: var(--container-radius);
   }
@@ -171,15 +163,11 @@ const StyledWrapper = styled.div`
     left: var(--circle-container-offset);
     top: var(--circle-container-offset);
     border-radius: var(--container-radius);
-    -webkit-box-shadow:
-      inset 0 0 0 3.375em rgba(255, 255, 255, 0.1),
-      inset 0 0 0 3.375em rgba(255, 255, 255, 0.1),
-      0 0 0 0.625em rgba(255, 255, 255, 0.1),
+    -webkit-box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1),
+      inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1),
       0 0 0 1.25em rgba(255, 255, 255, 0.1);
-    box-shadow:
-      inset 0 0 0 3.375em rgba(255, 255, 255, 0.1),
-      inset 0 0 0 3.375em rgba(255, 255, 255, 0.1),
-      0 0 0 0.625em rgba(255, 255, 255, 0.1),
+    box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1),
+      inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1),
       0 0 0 1.25em rgba(255, 255, 255, 0.1);
     display: -webkit-box;
     display: -ms-flexbox;
@@ -199,11 +187,9 @@ const StyledWrapper = styled.div`
     margin: auto;
     border-radius: var(--container-radius);
     background-color: var(--sun-bg);
-    -webkit-box-shadow:
-      0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
+    -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
       0em -0.062em 0.062em 0em #a1872a inset;
-    box-shadow:
-      0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
+    box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
       0em -0.062em 0.062em 0em #a1872a inset;
     -webkit-filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25))
       drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
@@ -229,19 +215,15 @@ const StyledWrapper = styled.div`
     height: 100%;
     background-color: var(--moon-bg);
     border-radius: inherit;
-    -webkit-box-shadow:
-      0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
+    -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
       0em -0.062em 0.062em 0em #969696 inset;
-    box-shadow:
-      0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
+    box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
       0em -0.062em 0.062em 0em #969696 inset;
     -webkit-transition: var(--transition);
     -o-transition: var(--transition);
     transition: var(--transition);
     position: relative;
-    transition:
-      all var(--transition),
-      transform 0.3s ease;
+    transition: all var(--transition), transform 0.3s ease;
   }
 
   .theme-switch__moon:hover {
@@ -287,37 +269,21 @@ const StyledWrapper = styled.div`
     position: absolute;
     bottom: -0.625em;
     left: 0.312em;
-    -webkit-box-shadow:
-      0.937em 0.312em var(--clouds-color),
-      -0.312em -0.312em var(--back-clouds-color),
-      1.437em 0.375em var(--clouds-color),
-      0.5em -0.125em var(--back-clouds-color),
-      2.187em 0 var(--clouds-color),
-      1.25em -0.062em var(--back-clouds-color),
-      2.937em 0.312em var(--clouds-color),
-      2em -0.312em var(--back-clouds-color),
-      3.625em -0.062em var(--clouds-color),
-      2.625em 0em var(--back-clouds-color),
-      4.5em -0.312em var(--clouds-color),
-      3.375em -0.437em var(--back-clouds-color),
-      4.625em -1.75em 0 0.437em var(--clouds-color),
-      4em -0.625em var(--back-clouds-color),
-      4.125em -2.125em 0 0.437em var(--back-clouds-color);
-    box-shadow:
-      0.937em 0.312em var(--clouds-color),
-      -0.312em -0.312em var(--back-clouds-color),
-      1.437em 0.375em var(--clouds-color),
-      0.5em -0.125em var(--back-clouds-color),
-      2.187em 0 var(--clouds-color),
-      1.25em -0.062em var(--back-clouds-color),
-      2.937em 0.312em var(--clouds-color),
-      2em -0.312em var(--back-clouds-color),
-      3.625em -0.062em var(--clouds-color),
-      2.625em 0em var(--back-clouds-color),
-      4.5em -0.312em var(--clouds-color),
-      3.375em -0.437em var(--back-clouds-color),
-      4.625em -1.75em 0 0.437em var(--clouds-color),
-      4em -0.625em var(--back-clouds-color),
+    -webkit-box-shadow: 0.937em 0.312em var(--clouds-color),
+      -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color),
+      0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color),
+      1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color),
+      2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color),
+      2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color),
+      3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color),
+      4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+    box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color),
+      1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color),
+      2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color),
+      2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color),
+      3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color),
+      4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color),
+      4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color),
       4.125em -2.125em 0 0.437em var(--back-clouds-color);
     -webkit-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
     -o-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
@@ -340,28 +306,15 @@ const StyledWrapper = styled.div`
 
   .theme-switch__checkbox:checked + .theme-switch__container {
     background-color: var(--container-night-bg);
-    background-image: linear-gradient(
-      to bottom,
-      var(--container-night-bg) 0%,
-      #2d3142 100%
-    );
+    background-image: linear-gradient(to bottom, var(--container-night-bg) 0%, #2d3142 100%);
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__circle-container {
-    left: calc(
-      100% - var(--circle-container-offset) - var(--circle-container-diameter)
-    );
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
+    left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__circle-container:hover {
-    left: calc(
-      100% - var(--circle-container-offset) - var(--circle-container-diameter) -
-        0.187em
-    );
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container:hover {
+    left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter) - 0.187em);
   }
 
   .theme-switch__circle-container:hover {
@@ -374,15 +327,11 @@ const StyledWrapper = styled.div`
     transform: translate(0);
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__clouds {
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
     bottom: -4.062em;
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__stars-container {
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
     top: 50%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -394,14 +343,10 @@ const StyledWrapper = styled.div`
   }
 
   .theme-switch__sun-moon-container::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: -5px;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.2) 0%,
-      transparent 70%
-    );
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -446,23 +391,17 @@ const StyledWrapper = styled.div`
     transition: opacity 0.3s ease;
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__shooting-star {
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__shooting-star {
     animation: shootingStar 2s linear infinite;
     opacity: 1;
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__shooting-star-2 {
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__shooting-star-2 {
     animation: shootingStar 3s linear infinite 1s;
     opacity: 1;
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__meteor {
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__meteor {
     animation: meteor 4s linear infinite 2s;
     opacity: 1;
   }
@@ -609,22 +548,16 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__stars-cluster {
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-cluster {
     opacity: 1;
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__aurora {
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__aurora {
     opacity: 1;
     animation: auroraWave 8s linear infinite;
   }
 
-  .theme-switch__checkbox:checked
-    + .theme-switch__container
-    .theme-switch__comets {
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__comets {
     opacity: 1;
   }
 
@@ -635,9 +568,7 @@ const StyledWrapper = styled.div`
     100% {
       transform: translateY(-100%) translateX(50%);
     }
-  }`;
+  }
+`;
 
-
-  export default ThemeSwitch;
-
-  
+export default ThemeSwitch;
