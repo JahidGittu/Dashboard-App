@@ -42,7 +42,12 @@ next-env.d.ts
 
 
 # my custom
-dashboard
+
+components
+Pages
+posts
+setting
+users
 api
 context
 hook
