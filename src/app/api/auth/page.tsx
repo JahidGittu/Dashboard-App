@@ -40,7 +40,7 @@ const AuthPage: React.FC = () => {
                 onClick={() => setIsSignUp(false)}
                 className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
                   !isSignUp
-                    ? 'bg-card-foreground/80 text-foreground shadow-sm'
+                    ? 'bg-card-foreground/40 text-foreground shadow-sm'
                     : 'text-foreground-muted hover:text-foreground'
                 }`}
               >
@@ -50,7 +50,7 @@ const AuthPage: React.FC = () => {
                 onClick={() => setIsSignUp(true)}
                 className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
                   isSignUp
-                    ? 'bg-background text-foreground shadow-sm'
+                    ? 'bg-card-foreground/40 text-foreground shadow-sm'
                     : 'text-foreground-muted hover:text-foreground'
                 }`}
               >
