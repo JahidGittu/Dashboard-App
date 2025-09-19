@@ -46,7 +46,9 @@ next-env.d.ts
 # Pagination.tsx
 
 
-api
+GoogleSignin.tsx
+SignIn
+
 context
 hook
 lib
