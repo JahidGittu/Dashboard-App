@@ -4,6 +4,7 @@ import { LoadingSpinner } from '@/app/dashboard/components/Loading';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 interface SignInFormProps {
@@ -16,25 +17,31 @@ const SignInForm: React.FC<SignInFormProps> = ({ switchToSignUp }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+  e.preventDefault();
+  setLoading(true);
+  setError('');
 
-    const res = await signIn('credentials', {
-      redirect: false,
-      email: formData.email,
-      password: formData.password,
-    });
+  const res = await signIn('credentials', {
+    redirect: false,
+    email: formData.email,
+    password: formData.password,
+  });
 
-    setLoading(false);
+  setLoading(false);
 
-    if (res?.error) setError(res.error);
-  };
+  if (res?.error) {
+    setError(res.error);
+  } else {
+    router.push('/dashboard');
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">

@@ -4,6 +4,7 @@ import { LoadingSpinner } from '@/app/dashboard/components/Loading';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail, User } from 'lucide-react';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 interface SignUpFormProps {
@@ -16,6 +17,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ switchToSignIn }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -26,15 +29,23 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ switchToSignIn }) => {
     setError('');
 
     try {
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch('/api/auth/SignUp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(text || 'Signup failed');
+      }
 
-      if (!res.ok) throw new Error(data.error || 'Signup failed');
+      if (!res.ok) {
+        throw new Error(data.error || 'Signup failed');
+      }
 
       // auto login after signup
       const loginRes = await signIn('credentials', {
@@ -43,9 +54,14 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ switchToSignIn }) => {
         password: formData.password,
       });
 
-      if (loginRes?.error) setError(loginRes.error);
+      if (loginRes?.error) {
+        setError(loginRes.error);
+      } else {
+        
+        router.push('/dashboard');
+      }
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || 'Something went wrong');
     } finally {
       setLoading(false);
     }
@@ -53,6 +69,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ switchToSignIn }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Name */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">Name</label>
         <div className="relative">
@@ -69,6 +86,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ switchToSignIn }) => {
         </div>
       </div>
 
+      {/* Email */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">Email</label>
         <div className="relative">
@@ -85,6 +103,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ switchToSignIn }) => {
         </div>
       </div>
 
+      {/* Password */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">Password</label>
         <div className="relative">
@@ -108,6 +127,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ switchToSignIn }) => {
         </div>
       </div>
 
+      {/* Error */}
       {error && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -118,6 +138,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ switchToSignIn }) => {
         </motion.div>
       )}
 
+      {/* Submit */}
       <button
         type="submit"
         disabled={loading}
