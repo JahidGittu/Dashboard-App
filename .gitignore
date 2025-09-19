@@ -45,15 +45,11 @@ next-env.d.ts
 
 # Pagination.tsx
 
-StateCard.tsx
-UserCard.tsx
-UserModal.tsx
-UserTable.tsx
 useUser.ts
 Pages
 
 setting
-users
+
 api
 context
 hook
