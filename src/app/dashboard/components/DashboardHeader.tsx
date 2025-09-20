@@ -77,7 +77,7 @@ export function DashboardHeader({ collapsed, setCollapsed }: DashboardHeaderProp
       </div>
 
       <div>
-        <h1 className="text-accent-foreground font-bold text-3xl"> Simple Dashboard </h1>
+        <h1 className="text-accent-foreground font-bold text-lg md:text-3xl lg:text-3xl"> Simple Dashboard </h1>
       </div>
 
       {/* Right: Actions */}
